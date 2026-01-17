@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitTrack - Haftalık Programım</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="top-controls">
+                <button id="theme-toggle" class="btn-secondary">🌓 Mod Değiştir</button>
+                <button id="download-pdf" class="btn-success">📄 Rapor Al</button>
+                <button id="reset-all" class="btn-danger">Haftayı Sıfırla</button>
+            </div>
+            <h1>FitTrack <span>Haftalık Takip</span></h1>
+            <div class="weekly-progress">
+                <p>Haftalık Genel İlerleme</p>
+                <div class="progress-bar-bg">
+                    <div id="total-progress-bar" class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-wrapper">
+            <aside class="exercise-guide card">
+                <h2>📚 Egzersiz Kütüphanesi</h2>
+                <div class="guide-scroll">
+                    <h3>🏃‍♂️ KARDİYO EGZERSİZLERİ</h3>
+                    <ul>
+                        <li class="category-title">Koşu ve Yürüme</li>
+                        <li>Running</li><li>Jogging</li><li>Sprinting</li><li>Interval Running</li><li>Treadmill Running</li><li>Incline Walking</li><li>Brisk Walking</li>
+                        
+                        <li class="category-title">Zıplama ve Plyometrik</li>
+                        <li>Jumping Jacks</li><li>Jump Rope</li><li>Burpees</li><li>High Knees</li><li>Mountain Climbers</li><li>Squat Jumps</li><li>Box Jumps</li><li>Tuck Jumps</li><li>Skater Jumps</li><li>Broad Jumps</li>
+                        
+                        <li class="category-title">Bisiklet ve Makineler</li>
+                        <li>Cycling</li><li>Stationary Bike</li><li>Spin Bike</li><li>Air Bike</li><li>Elliptical Trainer</li><li>Rowing Machine</li><li>Stair Climber</li><li>Stepper</li>
+                    </ul>
+
+                    <h3>💪 FITNESS EGZERSİZLERİ</h3>
+                    <ul>
+                        <li class="category-title">Göğüs</li>
+                        <li>Bench Press</li><li>Incline Bench Press</li><li>Decline Bench Press</li><li>Dumbbell Press</li><li>Push-Up</li><li>Chest Fly</li><li>Cable Crossover</li><li>Pec Deck</li>
+                        
+                        <li class="category-title">Sırt</li>
+                        <li>Pull-Up</li><li>Chin-Up</li><li>Lat Pulldown</li><li>Barbell Row</li><li>Dumbbell Row</li><li>Deadlift</li><li>Seated Cable Row</li><li>T-Bar Row</li><li>Face Pull</li>
+                        
+                        <li class="category-title">Omuz</li>
+                        <li>Shoulder Press</li><li>Military Press</li><li>Arnold Press</li><li>Lateral Raise</li><li>Front Raise</li><li>Rear Delt Fly</li><li>Upright Row</li><li>Shrugs</li>
+                        
+                        <li class="category-title">Kol (Biceps)</li>
+                        <li>Barbell Curl</li><li>Dumbbell Curl</li><li>Hammer Curl</li><li>Preacher Curl</li><li>Concentration Curl</li>
+                        
+                        <li class="category-title">Kol (Triceps)</li>
+                        <li>Triceps Pushdown</li><li>Skull Crushers</li><li>Dips</li><li>Close-Grip Bench Press</li><li>Overhead Triceps Extension</li><li>Triceps Kickback</li>
+                        
+                        <li class="category-title">Bacak ve Kalça</li>
+                        <li>Squat</li><li>Front Squat</li><li>Leg Press</li><li>Lunges</li><li>Walking Lunges</li><li>Bulgarian Split Squat</li><li>Romanian Deadlift</li><li>Stiff-Leg Deadlift</li><li>Leg Curl</li><li>Leg Extension</li><li>Calf Raises</li><li>Hip Thrust</li><li>Glute Bridge</li><li>Step-Ups</li>
+                        
+                        <li class="category-title">Karın</li>
+                        <li>Crunch</li><li>Sit-Up</li><li>Plank</li><li>Side Plank</li><li>Russian Twist</li><li>Hanging Leg Raise</li><li>Leg Raises</li><li>Bicycle Crunch</li><li>Flutter Kicks</li><li>V-Ups</li><li>Ab Rollout</li>
+                    </ul>
+                </div>
+            </aside>
+
+            <main>
+                <section class="add-exercise card">
+                    <h3>Yeni Egzersiz Ekle</h3>
+                    <div class="input-group">
+                        <select id="day-select">
+                            <option value="Pazartesi">Pazartesi</option>
+                            <option value="Salı">Salı</option>
+                            <option value="Çarşamba">Çarşamba</option>
+                            <option value="Perşembe">Perşembe</option>
+                            <option value="Cuma">Cuma</option>
+                            <option value="Cumartesi">Cumartesi</option>
+                            <option value="Pazar">Pazar</option>
+                        </select>
+                        <input type="text" id="exercise-name" placeholder="Egzersiz Adı">
+                        <input type="number" id="exercise-weight" placeholder="KG">
+                        <input type="number" id="sets" placeholder="Set">
+                        <select id="type-select">
+                            <option value="reps">Tekrar</option>
+                            <option value="mins">Dakika</option>
+                        </select>
+                        <input type="number" id="value-per-set" placeholder="Sayı">
+                        <button id="add-btn">Ekle</button>
+                    </div>
+                </section>
+
+                <section id="daily-planner" class="planner-grid">
+                    </section>
+            </main>
+        </div> <footer class="storage-warning">
+            <div class="warning-content">
+                <span class="warning-icon">ℹ️</span>
+                <p><strong>Veri Güvenliği Hatırlatması:</strong> FitTrack, verilerinizi gizlilik gereği yalnızca kullandığınız tarayıcının yerel hafızasında (LocalStorage) saklar. Tarayıcı önbelleğinin temizlenmesi veya farklı bir cihazdan giriş yapılması durumunda mevcut verilerinize ulaşılamayacağını lütfen unutmayın. Haftalık raporlarınızı PDF olarak kaydederek verilerinizi yedekleyebilirsiniz.</p>
+            </div>
+        </footer>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
