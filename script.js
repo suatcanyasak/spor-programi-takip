@@ -1,4 +1,4 @@
-/* WeeklyGym Security Engine - v2.1 - 2026 */
+/* WeeklyGym Security Engine - v3.0 - 2026 */
 const _0x12a9=['DOMContentLoaded','getItem','myWorkouts','parse','initializeApp','auth','firestore','login-btn','logout-btn','user-display','user-name','theme-toggle','click','GoogleAuthProvider','signInWithPopup','signOut','reload','onAuthStateChanged','displayName','split','loadFromCloud','syncData','setItem','currentUser','uid','collection','users','doc','set','serverTimestamp','error','theme','light','add','body','classList','toggle','contains','dark','querySelectorAll','li:not(.category-title)','forEach','exercise-name','value','focus','reset-all','confirm','download-pdf','total-progress-bar','width','toLocaleDateString','tr-TR','add-btn','day-select','exercise-weight','sets','type-select','value-per-set','push','now','daily-planner','innerHTML','day-card','completed','btn-delete'];const _0x3b1c=function(_0x32e1a3,_0x12a9e1){_0x32e1a3=_0x32e1a3-0x0;let _0x3b1ccb=_0x12a9[_0x32e1a3];return _0x3b1ccb;};
 
 const firebaseConfig = {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
             name: n,
             weight: document.getElementById('exercise-weight').value || null,
             sets: parseInt(s),
-            type: document.getElementById('type-select').value === 'reps' ? 'Tekrar' : 'Dk',
+            type: document.getElementById('type-select').value === 'reps' ? 'Tekrar' : 'Dakika',
             value: parseInt(v),
             completed: false
         });
@@ -135,43 +135,36 @@ document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
 
     document.getElementById('reset-all').onclick = () => {
-        if(confirm('Tüm hafta silinsin mi?')) { Object.keys(workouts).forEach(d => workouts[d] = []); syncData(); }
+        if(confirm('Tüm programı silmek istediğine emin misin?')) { Object.keys(workouts).forEach(d => workouts[d] = []); syncData(); }
     };
 
-    // --- PDF OLUŞTURUCU (ESKİ FORMAT GERİ GELDİ) ---
+    // --- SENİN İSTEDİĞİN O GÜZEL PDF FORMATI ---
     document.getElementById('download-pdf').onclick = () => {
         const progress = document.getElementById('total-progress-bar').style.width;
-        let content = `<div id="pdf-export" style="padding:30px; font-family:Arial; color:#1e293b; background:#fff;">
+        let content = `<div style="padding:30px; font-family:Arial; color:#1e293b; background:white;">
             <h1 style="color:#4f46e5; text-align:center;">WeeklyGym Gelişim Raporu</h1>
-            <p style="text-align:center;">Tarih: ${new Date().toLocaleDateString('tr-TR')} | Başarı: %${parseInt(progress) || 0}</p><hr style="border:1px solid #eee; margin:20px 0;">`;
+            <p style="text-align:center;">Tarih: ${new Date().toLocaleDateString('tr-TR')} | Başarı: %${parseInt(progress) || 0}</p><hr>`;
 
         Object.keys(workouts).forEach(day => {
             if (workouts[day].length > 0) {
-                content += `<h3 style="color:#4f46e5; border-bottom:2px solid #4f46e5; padding-bottom:5px;">${day}</h3>
-                <table style="width:100%; margin-bottom:20px; border-collapse:collapse;">
-                    <thead><tr style="background:#f8fafc;"><th style="text-align:left; padding:8px; border-bottom:1px solid #ddd;">Egzersiz</th><th style="padding:8px; border-bottom:1px solid #ddd;">Ağırlık</th><th style="padding:8px; border-bottom:1px solid #ddd;">Set/Sayı</th><th style="text-align:right; padding:8px; border-bottom:1px solid #ddd;">Durum</th></tr></thead>
-                    <tbody>`;
+                content += `<h3>${day}</h3><table style="width:100%; margin-bottom:15px; border-bottom:1px solid #eee;">`;
                 workouts[day].forEach(ex => {
                     content += `<tr>
-                        <td style="padding:8px; border-bottom:1px solid #eee;"><b>${ex.name}</b></td>
-                        <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">${ex.weight || '-'} kg</td>
-                        <td style="padding:8px; border-bottom:1px solid #eee; text-align:center;">${ex.sets} x ${ex.value}</td>
-                        <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">${ex.completed ? '✅' : '❌'}</td>
+                        <td style="padding:5px;"><b>${ex.name}</b></td>
+                        <td style="padding:5px;">${ex.weight || '-'}kg</td>
+                        <td style="padding:5px;">${ex.sets}x${ex.value}</td>
+                        <td style="padding:5px; text-align:right;">${ex.completed ? '✅' : '❌'}</td>
                     </tr>`;
                 });
-                content += `</tbody></table>`;
+                content += `</table>`;
             }
         });
-        content += `<p style="text-align:center; font-size:12px; color:#94a3b8; margin-top:30px;">Bu rapor WeeklyGym tarafından oluşturulmuştur.</p></div>`;
-        
-        const opt = {
-            margin: 10,
-            filename: 'WeeklyGym_Haftalik_Rapor.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
+        content += `</div>`;
+        html2pdf().set({ 
+            filename: 'WeeklyGym_Rapor.pdf',
+            html2canvas: { scale: 2 },
             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().set(opt).from(content).save();
+        }).from(content).save();
     };
 
     renderAll();
