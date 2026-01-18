@@ -11,6 +11,7 @@
     --card-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
 }
 
+/* Aydınlık Mod Renkleri */
 body.light-mode {
     --bg: #e2e8f0;
     --card-bg: #ffffff;
@@ -30,9 +31,9 @@ body.light-mode {
 body {
     background-color: var(--bg);
     color: var(--text);
-    padding: 15px; /* Mobil için biraz daraltıldı */
+    padding: 20px;
     transition: background-color 0.3s, color 0.3s;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 
 .container {
@@ -59,14 +60,12 @@ header h1 span {
 }
 
 .top-controls button {
-    flex: 1;
-    padding: 10px 5px;
+    padding: 10px 15px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
     font-weight: 600;
     color: white;
-    font-size: 0.8rem;
     transition: 0.2s;
 }
 
@@ -102,27 +101,39 @@ header h1 span {
     align-items: flex-start;
 }
 
-/* Sol Taraf: Rehber */
+/* KART GENEL YAPISI */
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: var(--card-shadow);
+    padding: 20px;
+    border: 1px solid var(--border);
+}
+
+/* SOL REHBER KISMI */
 .exercise-guide {
     flex: 0 0 280px;
     max-height: 85vh;
     position: sticky;
     top: 20px;
-    padding: 20px;
-    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Dışarı taşmayı engeller */
 }
 
 .guide-scroll {
     overflow-y: auto;
-    max-height: 70vh;
+    flex: 1;
+    padding-right: 10px;
 }
 
+/* Kaydırma Çubuğu Tasarımı */
 .guide-scroll::-webkit-scrollbar { width: 5px; }
 .guide-scroll::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
 .exercise-guide h2 { font-size: 1rem; margin-bottom: 15px; color: var(--primary); }
 .exercise-guide h3 { font-size: 0.85rem; margin-top: 15px; color: var(--success); }
-.exercise-guide ul { list-style: none; margin-top: 5px; }
+.exercise-guide ul { list-style: none; }
 .exercise-guide li {
     padding: 8px;
     font-size: 0.8rem;
@@ -143,31 +154,20 @@ header h1 span {
     padding-left: 8px !important;
 }
 
-/* Sağ Taraf: Ana İçerik */
+/* SAĞ ANA İÇERİK */
 main {
     flex: 1;
     min-width: 0;
 }
 
-/* --- KART YAPISI --- */
-.card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    box-shadow: var(--card-shadow);
-    padding: 20px;
-    border: 1px solid var(--border);
-}
-
 .add-exercise {
-    width: 100%;
     margin-bottom: 25px;
 }
 
 .input-group {
     display: flex;
-    flex-wrap: wrap; /* Mobilde taşmayı önlemek için sarma eklendi */
+    flex-wrap: wrap;
     gap: 10px;
-    width: 100%;
 }
 
 .input-group input, 
@@ -181,26 +181,14 @@ main {
     outline: none;
     font-size: 0.9rem;
     padding: 0 12px;
+    flex: 1;
+    min-width: 100px;
 }
 
-/* Masaüstü Genişlikleri */
-#day-select { flex: 1; min-width: 120px; }
-#exercise-name { flex: 2; min-width: 200px; }
-#exercise-weight { flex: 0.5; min-width: 70px; }
-#sets { flex: 0.5; min-width: 70px; }
-#type-select { flex: 0.8; min-width: 90px; }
-#value-per-set { flex: 0.5; min-width: 70px; }
-#add-btn { 
-    flex: 1; 
-    min-width: 120px;
-    background: var(--success); 
-    color: white; 
-    border: none; 
-    font-weight: bold; 
-    cursor: pointer;
-}
+#exercise-name { flex: 2; min-width: 180px; }
+#add-btn { background: var(--success); color: white; border: none; font-weight: bold; cursor: pointer; }
 
-/* --- GÜNLÜK PLANLAYICI GRID --- */
+/* PLANLAYICI GRID */
 .planner-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -250,56 +238,54 @@ body.light-mode .exercise-item { background: #f1f5f9; border: 1px solid #cbd5e1;
     font-size: 0.95rem;
 }
 
-.edit-mode-input:focus {
-    background: var(--input-bg);
-    border-color: var(--primary);
-}
+.edit-mode-input:focus { background: var(--input-bg); border-color: var(--primary); }
 
-.actions { display: flex; gap: 12px; align-items: center; }
+.actions { display: flex; gap: 10px; align-items: center; }
 
 .btn-delete {
     background: var(--danger) !important;
     color: white !important;
     border: none;
-    padding: 8px 12px;
+    padding: 8px 10px;
     border-radius: 6px;
     cursor: pointer;
 }
 
-/* --- FOOTER / UYARI --- */
+/* FOOTER / UYARI */
 .storage-warning {
     margin-top: 40px;
     padding: 20px;
     background: rgba(79, 70, 229, 0.05);
     border-radius: 12px;
     border: 1px dashed var(--primary);
+    text-align: center;
 }
 
-/* --- MOBİL UYUMLULUK (CRITICAL FIXES) --- */
+/* --- MOBİL UYUMLULUK (KESİN ÇÖZÜM) --- */
 @media (max-width: 900px) {
     .content-wrapper {
-        flex-direction: column; /* Rehber ve Main alt alta gelsin */
+        display: block; /* Yan yana dizilimi iptal et */
     }
 
     .exercise-guide {
-        position: relative; /* Sticky kaldırıldı */
-        top: 0;
+        position: relative !important;
+        top: 0 !important;
+        width: 100% !important;
         flex: none;
-        width: 100%;
-        max-height: 300px; /* Mobilde rehber çok yer kaplamasın */
-        margin-bottom: 20px;
+        max-height: 350px; /* Mobilde rehberin kaplayacağı alan */
+        margin-bottom: 25px;
     }
 
     .guide-scroll {
-        max-height: 200px;
+        max-height: 250px; /* Liste taşmasını önleyen yükseklik */
     }
 
     .top-controls {
-        flex-direction: column; /* Butonlar mobilde alt alta */
+        flex-direction: column;
     }
 
     .input-group {
-        flex-direction: column; /* Inputlar mobilde tam genişlik */
+        flex-direction: column;
     }
 
     .input-group input, 
@@ -310,11 +296,6 @@ body.light-mode .exercise-item { background: #f1f5f9; border: 1px solid #cbd5e1;
     }
 
     .planner-grid {
-        grid-template-columns: 1fr; /* Mobilde kartlar tek sütun */
-    }
-
-    .warning-content {
-        flex-direction: column;
-        text-align: center;
+        grid-template-columns: 1fr;
     }
 }
