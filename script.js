@@ -1,7 +1,7 @@
-/* WeeklyGym - Local Edition - v1.0 */
+/* WeeklyGym - Local Edition - v2.0 */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Verileri LocalStorage'dan çek veya boş taslak oluştur
+    // Verileri LocalStorage'dan çek
     let workouts = JSON.parse(localStorage.getItem('myWorkouts')) || {
         Pazartesi: [], Salı: [], Çarşamba: [], Perşembe: [], Cuma: [], Cumartesi: [], Pazar: []
     };
@@ -35,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         saveData();
-        // Formu temizle
         ['exercise-name', 'exercise-weight', 'sets', 'value-per-set'].forEach(id => document.getElementById(id).value = '');
     };
 
@@ -57,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
             list.forEach(ex => {
                 const item = document.createElement('div');
                 item.className = `exercise-item ${ex.completed ? 'completed' : ''}`;
-                
                 item.innerHTML = `
                     <div style="flex:1">
                         <strong>${ex.name}</strong><br>
@@ -66,8 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="actions">
                         <input type="checkbox" ${ex.completed ? 'checked' : ''}>
                         <button class="btn-delete">🗑️</button>
-                    </div>
-                `;
+                    </div>`;
 
                 item.querySelector('input').onchange = (e) => {
                     ex.completed = e.target.checked;
@@ -80,7 +77,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         saveData();
                     }
                 };
-
                 card.querySelector('.exercise-list').appendChild(item);
             });
             container.appendChild(card);
@@ -113,53 +109,59 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     });
 
-    // --- PDF KAYDETME (DÜZELTİLMİŞ) ---
+    // --- PDF KAYDETME (PROFESYONEL VE HATASIZ) ---
     document.getElementById('download-pdf').onclick = () => {
         const progress = document.getElementById('total-progress-bar').style.width;
+        
         let content = `
-            <div style="padding:20px; font-family: sans-serif;">
-                <h1 style="color:#4f46e5; text-align:center; margin-bottom:5px;">WeeklyGym Gelişim Raporu</h1>
-                <p style="text-align:center; color:#666; margin-bottom:20px;">
-                    Tarih: ${new Date().toLocaleDateString('tr-TR')} | Haftalık Başarı: %${parseInt(progress) || 0}
-                </p>
-                <hr style="border:1px solid #eee; margin-bottom:20px;">
+            <div style="padding: 20px; font-family: Arial, sans-serif; color: #333;">
+                <h1 style="color: #4f46e5; text-align: center; margin-bottom: 5px;">WeeklyGym Raporu</h1>
+                <p style="text-align: center; color: #666;">Haftalık Genel Başarı: %${parseInt(progress) || 0}</p>
+                <hr style="border: 1px solid #eee; margin: 20px 0;">
         `;
 
         Object.keys(workouts).forEach(day => {
             if (workouts[day].length > 0) {
                 content += `
-                    <h3 style="background:#f8fafc; padding:10px; border-left:4px solid #4f46e5;">${day}</h3>
-                    <table style="width:100%; border-collapse:collapse; margin-bottom:20px;">
-                        <tr style="background:#f1f5f9; text-align:left;">
-                            <th style="padding:10px; border:1px solid #ddd;">Egzersiz</th>
-                            <th style="padding:10px; border:1px solid #ddd;">Detay</th>
-                            <th style="padding:10px; border:1px solid #ddd;">Durum</th>
-                        </tr>`;
+                    <h3 style="background: #f8fafc; padding: 10px; border-left: 4px solid #4f46e5; margin-top: 20px;">${day}</h3>
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                        <thead>
+                            <tr style="background: #f1f5f9; text-align: left;">
+                                <th style="padding: 10px; border: 1px solid #ddd;">Egzersiz</th>
+                                <th style="padding: 10px; border: 1px solid #ddd;">Detay</th>
+                                <th style="padding: 10px; border: 1px solid #ddd; text-align: center;">Durum</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
                 
                 workouts[day].forEach(ex => {
-                    const statusText = ex.completed ? "TAMAMLANDI" : "YAPILMADI";
+                    const statusText = ex.completed ? "TAMAMLANDI" : "EKSİK";
                     const statusColor = ex.completed ? "#10b981" : "#ef4444";
                     
                     content += `
                         <tr>
-                            <td style="padding:10px; border:1px solid #ddd;"><strong>${ex.name}</strong></td>
-                            <td style="padding:10px; border:1px solid #ddd;">${ex.weight ? ex.weight+'kg | ' : ''}${ex.sets}x${ex.value}</td>
-                            <td style="padding:10px; border:1px solid #ddd; color:${statusColor}; font-weight:bold;">${statusText}</td>
+                            <td style="padding: 10px; border: 1px solid #ddd;"><strong>${ex.name}</strong></td>
+                            <td style="padding: 10px; border: 1px solid #ddd;">${ex.weight ? ex.weight + 'kg | ' : ''}${ex.sets}x${ex.value} ${ex.type}</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold; color: ${statusColor};">${statusText}</td>
                         </tr>`;
                 });
-                content += `</table>`;
+                content += `</tbody></table>`;
             }
         });
-        
-        content += `<p style="text-align:center; color:#999; font-size:12px; margin-top:30px;">WeeklyGym - Dijital Antrenman Günlüğü</p></div>`;
+
+        content += `
+                <div style="margin-top: 30px; text-align: center; font-size: 12px; color: #aaa;">
+                    WeeklyGym - Kişisel Gelişim Takipçisi
+                </div>
+            </div>`;
 
         // PDF Ayarları
         const opt = {
-            margin:       10,
-            filename:     'Haftalik_Spor_Raporu.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { scale: 2 },
-            jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            margin: 10,
+            filename: 'Haftalik_Spor_Raporu.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(content).save();
