@@ -11,7 +11,9 @@ const firebaseConfig = {
     measurementId: "G-7N6ZQPQHTD"
 };
 
+// Başlatma (Sadece bu format compat sürümüyle çalışır)
 firebase.initializeApp(firebaseConfig);
+firebase.analytics(); // Analytics'i aktif eder
 const auth = firebase.auth();
 const db = firebase.firestore();
 
