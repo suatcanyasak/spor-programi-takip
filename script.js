@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(confirm('Tüm programı silmek istediğine emin misin?')) { Object.keys(workouts).forEach(d => workouts[d] = []); syncData(); }
     };
 
-    // --- SENİN İSTEDİĞİN O GÜZEL PDF FORMATI ---
+    // --- PDF FORMATI ---
     document.getElementById('download-pdf').onclick = () => {
         const progress = document.getElementById('total-progress-bar').style.width;
         let content = `<div style="padding:30px; font-family:Arial; color:#1e293b; background:white;">
