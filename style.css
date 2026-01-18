@@ -11,7 +11,6 @@
     --card-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
 }
 
-/* Aydınlık Mod Renkleri */
 body.light-mode {
     --bg: #e2e8f0;
     --card-bg: #ffffff;
@@ -110,7 +109,7 @@ header h1 span {
     border: 1px solid var(--border);
 }
 
-/* SOL REHBER KISMI */
+/* --- SOL REHBER KISMI (DÜZELTİLDİ) --- */
 .exercise-guide {
     flex: 0 0 280px;
     max-height: 85vh;
@@ -118,13 +117,20 @@ header h1 span {
     top: 20px;
     display: flex;
     flex-direction: column;
-    overflow: hidden; /* Dışarı taşmayı engeller */
+    overflow: hidden !important; /* Dışarı taşan listeyi keser */
 }
 
 .guide-scroll {
-    overflow-y: auto;
+    overflow-y: auto !important; /* Sadece bu alanın içinde kaydırma yapar */
+    overflow-x: hidden;
     flex: 1;
     padding-right: 10px;
+}
+
+.guide-scroll ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 /* Kaydırma Çubuğu Tasarımı */
@@ -133,7 +139,6 @@ header h1 span {
 
 .exercise-guide h2 { font-size: 1rem; margin-bottom: 15px; color: var(--primary); }
 .exercise-guide h3 { font-size: 0.85rem; margin-top: 15px; color: var(--success); }
-.exercise-guide ul { list-style: none; }
 .exercise-guide li {
     padding: 8px;
     font-size: 0.8rem;
@@ -261,10 +266,10 @@ body.light-mode .exercise-item { background: #f1f5f9; border: 1px solid #cbd5e1;
     text-align: center;
 }
 
-/* --- MOBİL UYUMLULUK (KESİN ÇÖZÜM) --- */
+/* --- MOBİL UYUMLULUK (CRITICAL FIX) --- */
 @media (max-width: 900px) {
     .content-wrapper {
-        display: block; /* Yan yana dizilimi iptal et */
+        display: block !important;
     }
 
     .exercise-guide {
@@ -272,12 +277,15 @@ body.light-mode .exercise-item { background: #f1f5f9; border: 1px solid #cbd5e1;
         top: 0 !important;
         width: 100% !important;
         flex: none;
-        max-height: 350px; /* Mobilde rehberin kaplayacağı alan */
-        margin-bottom: 25px;
+        height: 300px !important; /* Mobilde yüksekliği sabitledik */
+        max-height: 300px !important;
+        margin-bottom: 30px !important;
+        display: flex !important;
+        overflow: hidden !important;
     }
 
     .guide-scroll {
-        max-height: 250px; /* Liste taşmasını önleyen yükseklik */
+        max-height: 220px !important; /* Listenin kutudan taşmasını engeller */
     }
 
     .top-controls {
