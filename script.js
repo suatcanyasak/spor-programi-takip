@@ -1,1 +1,170 @@
-const _0x5a21=['DOMContentLoaded','getItem','myWorkouts','parse','initializeApp','auth','firestore','login-btn','logout-btn','user-display','user-name','theme-toggle','click','GoogleAuthProvider','signInWithPopup','signOut','reload','onAuthStateChanged','displayName','split','loadFromCloud','renderAll','syncData','setItem','currentUser','uid','collection','users','doc','set','serverTimestamp','error','theme','light','add','body','classList','toggle','contains','dark','querySelectorAll','li:not(.category-title)','forEach','exercise-name','value','focus','style','borderColor','reset-all','confirm','download-pdf','total-progress-bar','width','toLocaleDateString','tr-TR','add-btn','day-select','exercise-weight','sets','type-select','value-per-set','push','now','updateValue','deleteExercise','toggleExercise','daily-planner','innerHTML','day-card','day-percentage'];(function(_0x1b2b8d,_0x5a21d2){const _0x4d2e3b=function(_0x2e353f){while(--_0x2e353f){_0x1b2b8d['push'](_0x1b2b8d['shift']());}};_0x4d2e3b(++_0x5a21d2);}(_0x5a21,0x1b8));const _0x4d2e=function(_0x1b2b8d,_0x5a21d2){_0x1b2b8d=_0x1b2b8d-0x0;let _0x4d2e3b=_0x5a21[_0x1b2b8d];return _0x4d2e3b;};const firebaseConfig={'apiKey':'AIzaSyBg-_Go01JU8roA7qRe7pR55dvEAfKz4Sg','authDomain':'weeklygym-4abc2.firebaseapp.com','projectId':'weeklygym-4abc2','storageBucket':'weeklygym-4abc2.firebasestorage.app','messagingSenderId':'986809474109','appId':'1:986809474109:web:a6323b839235df220a9e54','measurementId':'G-7N6ZQPQHTD'};firebase[_0x4d2e('0x4')](firebaseConfig);const auth=firebase[_0x4d2e('0x5')]();const db=firebase[_0x4d2e('0x6')]();document['addEventListener'](_0x4d2e('0x0'),()=>{let _0x1c2b={Pazartesi:[],Salı:[],Çarşamba:[],Perşembe:[],Cuma:[],Cumartesi:[],Pazar:[]};let _0x3d4e=JSON[_0x4d2e('0x3')](localStorage[_0x4d2e('0x1')](_0x4d2e('0x2')))||_0x1c2b;let _0xcurrentUser=null;const _0xlogin=document['getElementById'](_0x4d2e('0x7'));const _0xlogout=document['getElementById'](_0x4d2e('0x8'));const _0xdisplay=document['getElementById'](_0x4d2e('0x9'));const _0xname=document['getElementById'](_0x4d2e('0xa'));if(_0xlogin){_0xlogin['addEventListener'](_0x4d2e('0xc'),()=>{const _0x5f2e=new firebase['auth'][_0x4d2e('0xd')]();auth[_0x4d2e('0xe')](_0x5f2e);});}if(_0xlogout){_0xlogout['addEventListener'](_0x4d2e('0xc'),()=>{auth[_0x4d2e('0xf')]()['then'](()=>{localStorage['removeItem'](_0x4d2e('0x2'));location[_0x4d2e('0x10')]();});});}auth[_0x4d2e('0x11')](async(_0xuser)=>{if(_0xuser){_0xcurrentUser=_0xuser;if(_0xlogin)_0xlogin['style']['display']='none';if(_0xdisplay)_0xdisplay['style']['display']='flex';if(_0xname)_0xname['innerText']='Merhaba,\x20'+_0xuser[_0x4d2e('0x12')][_0x4d2e('0x13')]('\x20')[0x0];await _0xload();}else{_0xcurrentUser=null;_0xrender();}});async function _0xsync(){localStorage[_0x4d2e('0x17')](_0x4d2e('0x2'),JSON['stringify'](_0x3d4e));if(_0xcurrentUser){try{await db[_0x4d2e('0x1a')](_0x4d2e('0x1b'))[_0x4d2e('0x1c')](_0xcurrentUser['uid'])[_0x4d2e('0x1d')]({workouts:JSON['stringify'](_0x3d4e),lastUpdated:firebase['firestore']['FieldValue'][_0x4d2e('0x1e')]()});}catch(_0xe){console[_0x4d2e('0x1f')](_0xe);}}_0xrender();}async function _0xload(){if(!_0xcurrentUser)return;const _0xdoc=await db[_0x4d2e('0x1a')](_0x4d2e('0x1b'))[_0x4d2e('0x1c')](_0xcurrentUser['uid'])['get']();if(_0xdoc['exists']){_0x3d4e=JSON[_0x4d2e('0x3')](_0xdoc['data']()['workouts']);_0xrender();}}function _0xrender(){_0xrenderPlanner();_0xupdateProgress();}function _0xrenderPlanner(){const _0xcont=document['getElementById'](_0x4d2e('0x43'));if(!_0xcont)return;_0xcont[_0x4d2e('0x44')]='';Object['keys'](_0x3d4e)[_0x4d2e('0x2a')](_0xday=>{const _0xlist=_0x3d4e[_0xday];const _0xcard=document['createElement']('div');_0xcard['className']=_0x4d2e('0x45');_0xcard[_0x4d2e('0x44')]=`<h4>${_0xday}</h4><div\x20class="exercise-list">${_0xlist['map'](_0xex=>`<div\x20class="exercise-item\x20${_0xex['completed']?'completed':''}">${_0xex['name']}</div>`)['join']('')}</div>`;_0xcont['appendChild'](_0xcard);});}function _0xupdateProgress(){let _0xt=0x0,_0xd=0x0;Object['keys'](_0x3d4e)[_0x4d2e('0x2a')](_0xday=>{_0xt+=_0x3d4e[_0xday]['length'];_0xd+=_0x3d4e[_0xday]['filter'](_0xe=>_0xe['completed'])['length'];});const _0xbar=document['getElementById'](_0x4d2e('0x33'));if(_0xbar)_0xbar['style'][_0x4d2e('0x34')]=(_0xt>0x0?(_0xd/_0xt)*0x64:0x0)+'%';}_0xrender();});
+/* WeeklyGym Security Engine - 2026 */
+const _0x12a9=['DOMContentLoaded','getItem','myWorkouts','parse','initializeApp','auth','firestore','login-btn','logout-btn','user-display','user-name','theme-toggle','click','GoogleAuthProvider','signInWithPopup','signOut','reload','onAuthStateChanged','displayName','split','loadFromCloud','syncData','setItem','currentUser','uid','collection','users','doc','set','serverTimestamp','error','theme','light','add','body','classList','toggle','contains','dark','querySelectorAll','li:not(.category-title)','forEach','exercise-name','value','focus','reset-all','confirm','download-pdf','total-progress-bar','width','toLocaleDateString','tr-TR','add-btn','day-select','exercise-weight','sets','type-select','value-per-set','push','now','daily-planner','innerHTML','day-card','completed','btn-delete'];const _0x3b1c=function(_0x32e1a3,_0x12a9e1){_0x32e1a3=_0x32e1a3-0x0;let _0x3b1ccb=_0x12a9[_0x32e1a3];return _0x3b1ccb;};
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBg-_Go01JU8roA7qRe7pR55dvEAfKz4Sg",
+    authDomain: "weeklygym-4abc2.firebaseapp.com",
+    projectId: "weeklygym-4abc2",
+    storageBucket: "weeklygym-4abc2.firebasestorage.app",
+    messagingSenderId: "986809474109",
+    appId: "1:986809474109:web:a6323b839235df220a9e54",
+    measurementId: "G-7N6ZQPQHTD"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+document.addEventListener('DOMContentLoaded', () => {
+    let workouts = JSON.parse(localStorage.getItem('myWorkouts')) || {
+        Pazartesi: [], Salı: [], Çarşamba: [], Perşembe: [], Cuma: [], Cumartesi: [], Pazar: []
+    };
+    let currentUser = null;
+
+    // --- ELEMENTLER ---
+    const loginBtn = document.getElementById('login-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const userDisplay = document.getElementById('user-display');
+    const userNameSpan = document.getElementById('user-name');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // --- OTURUM YÖNETİMİ ---
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            currentUser = user;
+            if(loginBtn) loginBtn.style.display = 'none';
+            if(userDisplay) userDisplay.style.display = 'flex';
+            if(userNameSpan) userNameSpan.innerText = `Merhaba, ${user.displayName.split(' ')[0]}`;
+            await loadFromCloud();
+        } else {
+            currentUser = null;
+            renderAll();
+        }
+    });
+
+    if(loginBtn) loginBtn.onclick = () => auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    if(logoutBtn) logoutBtn.onclick = () => auth.signOut().then(() => { localStorage.removeItem('myWorkouts'); location.reload(); });
+
+    // --- VERİ SENKRONİZASYONU ---
+    async function syncData() {
+        localStorage.setItem('myWorkouts', JSON.stringify(workouts));
+        if (currentUser) {
+            try {
+                await db.collection("users").doc(currentUser.uid).set({
+                    workouts: JSON.stringify(workouts),
+                    lastUpdated: firebase.firestore.FieldValue.serverTimestamp()
+                });
+            } catch (e) { console.error("Sync Error", e); }
+        }
+        renderAll();
+    }
+
+    async function loadFromCloud() {
+        if (!currentUser) return;
+        const doc = await db.collection("users").doc(currentUser.uid).get();
+        if (doc.exists) { workouts = JSON.parse(doc.data().workouts); renderAll(); }
+    }
+
+    // --- REHBER SEÇİMİ ---
+    document.querySelectorAll('.exercise-guide li:not(.category-title)').forEach(item => {
+        item.onclick = () => {
+            const input = document.getElementById('exercise-name');
+            input.value = item.innerText;
+            input.focus();
+        };
+    });
+
+    // --- EGZERSİZ EKLEME ---
+    document.getElementById('add-btn').onclick = () => {
+        const d = document.getElementById('day-select').value;
+        const n = document.getElementById('exercise-name').value;
+        const s = document.getElementById('sets').value;
+        const v = document.getElementById('value-per-set').value;
+
+        if (!n || !s || !v) return alert("Eksik bilgi!");
+
+        workouts[d].push({
+            id: Date.now(),
+            name: n,
+            weight: document.getElementById('exercise-weight').value || null,
+            sets: parseInt(s),
+            type: document.getElementById('type-select').value === 'reps' ? 'Tekrar' : 'Dk',
+            value: parseInt(v),
+            completed: false
+        });
+        syncData();
+        ['exercise-name', 'exercise-weight', 'sets', 'value-per-set'].forEach(id => document.getElementById(id).value = '');
+    };
+
+    // --- GÖRÜNTÜLEME VE ONAY ---
+    function renderAll() {
+        const container = document.getElementById('daily-planner');
+        if (!container) return;
+        container.innerHTML = '';
+
+        Object.keys(workouts).forEach(day => {
+            const list = workouts[day];
+            const done = list.filter(ex => ex.completed).length;
+            const perc = list.length > 0 ? Math.round((done / list.length) * 100) : 0;
+
+            const card = document.createElement('div');
+            card.className = 'day-card';
+            card.innerHTML = `<h4>${day} <span>%${perc}</span></h4><div class="exercise-list"></div>`;
+            
+            list.forEach(ex => {
+                const item = document.createElement('div');
+                item.className = `exercise-item ${ex.completed ? 'completed' : ''}`;
+                
+                const info = document.createElement('div');
+                info.style.flex = "1";
+                info.innerHTML = `<strong>${ex.name}</strong><br><small>${ex.weight ? ex.weight+'kg | ' : ''}${ex.sets}x${ex.value} ${ex.type}</small>`;
+                
+                const actions = document.createElement('div');
+                actions.className = "actions";
+                
+                const check = document.createElement('input');
+                check.type = "checkbox";
+                check.checked = ex.completed;
+                check.onchange = () => { ex.completed = check.checked; syncData(); };
+                
+                const del = document.createElement('button');
+                del.innerHTML = '🗑️';
+                del.className = 'btn-delete';
+                del.onclick = () => { if(confirm('Silinsin mi?')) { workouts[day] = list.filter(i => i.id !== ex.id); syncData(); } };
+                
+                actions.append(check, del);
+                item.append(info, actions);
+                card.querySelector('.exercise-list').appendChild(item);
+            });
+            container.appendChild(card);
+        });
+        const bar = document.getElementById('total-progress-bar');
+        let t = 0, d = 0;
+        Object.values(workouts).forEach(day => { t += day.length; d += day.filter(e => e.completed).length; });
+        if (bar) bar.style.width = (t > 0 ? (d / t) * 100 : 0) + '%';
+    }
+
+    // --- TEMA VE PDF VE SIFIRLA ---
+    themeToggle.onclick = () => {
+        document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', document.body.classList.contains('light-mode') ? 'light' : 'dark');
+    };
+    if (localStorage.getItem('theme') === 'light') document.body.classList.add('light-mode');
+
+    document.getElementById('reset-all').onclick = () => {
+        if(confirm('Tüm hafta silinsin mi?')) { Object.keys(workouts).forEach(d => workouts[d] = []); syncData(); }
+    };
+
+    document.getElementById('download-pdf').onclick = () => {
+        const p = document.getElementById('total-progress-bar').style.width;
+        let c = `<div style="padding:20px;font-family:Arial;"><h2>WeeklyGym Rapor</h2><p>Başarı: %${parseInt(p)}</p><hr>`;
+        Object.keys(workouts).forEach(day => {
+            if(workouts[day].length > 0) {
+                c += `<h3>${day}</h3><ul>` + workouts[day].map(e => `<li>${e.completed?'[X]':'[ ]'} ${e.name} - ${e.sets}x${e.value}</li>`).join('') + `</ul>`;
+            }
+        });
+        html2pdf().from(c + `</div>`).save('WeeklyGym.pdf');
+    };
+
+    renderAll();
+});
