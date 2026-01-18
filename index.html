@@ -3,19 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>WeeklyGym - Haftalık Spor ve Egzersiz Takip Programı</title>
-    <meta name="description" content="WeeklyGym ile haftalık spor programınızı planlayın, antrenmanlarınızı kaydedin ve profesyonel gelişim raporunuzu PDF olarak indirin.">
-    <meta name="keywords" content="WeeklyGym, spor takip, antrenman programı, fitness takip, haftalık egzersiz, spor günlüğü">
-    <meta name="author" content="WeeklyGym">
-    <meta name="robots" content="index, follow">
-
-    <meta property="og:title" content="WeeklyGym - Haftalık Programım">
-    <meta property="og:description" content="Haftalık spor programınızı dijital olarak takip edin ve gelişim raporunuzu PDF olarak alın.">
-    <meta property="og:type" content="website">
-    
-    <meta name="google-site-verification" content="kkC8CZiDIzF1XDjDxWxQlSEgTSDAo_sf-Qp8xsid5Ck" />
-
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -41,29 +29,19 @@
             <aside class="exercise-guide card">
                 <h2>📚 Egzersiz Kütüphanesi</h2>
                 <div class="guide-scroll">
-                    <h3>🏃‍♂️ KARDİYO EGZERSİZLERİ</h3>
+                    <h3>🏃‍♂️ KARDİYO</h3>
                     <ul>
                         <li class="category-title">Koşu ve Yürüme</li>
-                        <li>Running</li><li>Jogging</li><li>Sprinting</li><li>Interval Running</li><li>Treadmill Running</li><li>Incline Walking</li><li>Brisk Walking</li>
-                        <li class="category-title">Zıplama ve Plyometrik</li>
-                        <li>Jumping Jacks</li><li>Jump Rope</li><li>Burpees</li><li>High Knees</li><li>Mountain Climbers</li>
-                        <li class="category-title">Bisiklet ve Makineler</li>
-                        <li>Cycling</li><li>Stationary Bike</li><li>Elliptical</li><li>Rowing Machine</li>
+                        <li>Running</li><li>Jogging</li><li>Sprinting</li>
+                        <li class="category-title">Zıplama</li>
+                        <li>Jumping Jacks</li><li>Jump Rope</li><li>Burpees</li>
                     </ul>
-                    <h3>💪 FITNESS EGZERSİZLERİ</h3>
+                    <h3>💪 FITNESS</h3>
                     <ul>
                         <li class="category-title">Göğüs</li>
-                        <li>Bench Press</li><li>Dumbbell Press</li><li>Push-Up</li>
+                        <li>Bench Press</li><li>Push-Up</li>
                         <li class="category-title">Sırt</li>
-                        <li>Pull-Up</li><li>Lat Pulldown</li><li>Barbell Row</li><li>Deadlift</li>
-                        <li class="category-title">Omuz</li>
-                        <li>Shoulder Press</li><li>Lateral Raise</li><li>Front Raise</li>
-                        <li class="category-title">Kol</li>
-                        <li>Biceps Curl</li><li>Hammer Curl</li><li>Triceps Pushdown</li><li>Dips</li>
-                        <li class="category-title">Bacak ve Kalça</li>
-                        <li>Squat</li><li>Leg Press</li><li>Lunges</li><li>Hip Thrust</li>
-                        <li class="category-title">Karın</li>
-                        <li>Crunch</li><li>Plank</li><li>Leg Raise</li><li>Russian Twist</li>
+                        <li>Pull-Up</li><li>Deadlift</li>
                     </ul>
                 </div>
             </aside>
@@ -99,25 +77,10 @@
         <footer class="storage-warning">
             <div class="warning-content">
                 <span class="warning-icon">ℹ️</span>
-                <p><strong>Veri Güvenliği Hatırlatması:</strong> WeeklyGym, verilerinizi yalnızca tarayıcınızın yerel hafızasında saklar. Haftalık raporlarınızı PDF olarak kaydederek yedekleyebilirsiniz.</p>
+                <p><strong>Yerel Depolama:</strong> Verileriniz sadece bu tarayıcıda saklanır. Tarayıcı verilerini silerseniz programınız kaybolabilir.</p>
             </div>
         </footer>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics-compat.js"></script>
-
     <script src="script.js"></script>
-    
-    <div id="auth-section" style="text-align: right; padding: 10px;">
-        <button id="login-btn" class="btn-success">Google ile Giriş Yap</button>
-        <div id="user-display" style="display:none; align-items:center; justify-content: flex-end; gap:10px;">
-            <span id="user-name" style="font-size: 0.9rem;"></span>
-            <button id="logout-btn" class="btn-danger" style="padding: 5px 10px; font-size: 0.8rem;">Çıkış</button>
-        </div>
-    </div>
 </body>
 </html>
-
-
